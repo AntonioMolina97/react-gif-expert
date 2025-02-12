@@ -1,17 +1,20 @@
 import { useState } from "react"
+import { AddCategory } from "./components/AddCategory";
 
 export const GifExpertApp = () => {
 
-  const [categories, setCategories] = useState("Frieren anime");
+  const [categories, setCategories] = useState(["Frieren anime", "Dandadan"]);
 
   const onAddCategory = () => {
-    categories.push('OVerwatch');
-    console.log(categories);
+    // setCategories(['Bleach anime',...categories]);
+    setCategories( cat => ['Bleach anime',...categories]);
   }
 
   return (
     <>
         <h1>GifExpertApp</h1>
+
+        <AddCategory/>
 
         <button onClick={onAddCategory}>Agregar Categoria</button>
 
