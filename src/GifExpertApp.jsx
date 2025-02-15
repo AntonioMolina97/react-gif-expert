@@ -5,23 +5,36 @@ export const GifExpertApp = () => {
 
   const [categories, setCategories] = useState(["Frieren anime", "Dandadan"]);
 
-  const onAddCategory = () => {
+  const onAddCategory = (newCategory) => {
+    const newCategoryLower = newCategory.toLowerCase();
+
+    if(categories.some(category => category.toLowerCase() === newCategoryLower)) return;
+    // if (categories.includes(newCategory)) return;
+
+    setCategories( cat => [newCategory,...categories]);
     // setCategories(['Bleach anime',...categories]);
-    setCategories( cat => ['Bleach anime',...categories]);
   }
 
   return (
-    <>
+    <> 
         <h1>GifExpertApp</h1>
 
-        <AddCategory/>
+        <AddCategory  
+        // setCategories={setCategories}
+        onNewCategory={event => onAddCategory(event)}
+        
+        />
 
-        <button onClick={onAddCategory}>Agregar Categoria</button>
 
         <ol>
-          { categories.map( category => {
-            return <li key={category}>{category}</li>
-          })}
+          { 
+            categories.map( category => (
+                <div key={category}>
+                  <li>{category}</li>
+                </div>
+              )
+            )
+          }
         </ol>
     </>
   )
